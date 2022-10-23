@@ -8,7 +8,7 @@ services:
       ["./:/usr/src/app/"]
     ports:
       - "8002:8000"
-    enviroment:
+    environment:
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       DB_HOST: ${DB_HOST}

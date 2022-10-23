@@ -1,15 +1,24 @@
 from fastapi import FastAPI
-from routers import ping
-import sqlalchemy
-from datetime import datetime
-import sqlite3
-import requests
-import csv
+from src.app.routers import ping
+from db import database
+from src.app.routers import records
+import uvicorn
 
 app = FastAPI()
+
+
+@app.on_event('startup')
+async def startup():
+    await database.connect()
+
+
+@app.on_event('shutdown')
+async def shutdown():
+    await database.disconnect()
+
+
 app.include_router(ping.router)
+app.include_router(records.router)
 
-
-@app.get('/get_record_date')
-def get_record_by_date():
-    return
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8075)
