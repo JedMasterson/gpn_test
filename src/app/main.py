@@ -9,12 +9,12 @@ app = FastAPI()
 
 @app.on_event('startup')
 async def startup():
-    await database.connect()
+    database.connect()
 
 
 @app.on_event('shutdown')
 async def shutdown():
-    await database.disconnect()
+    database.dispose()
 
 
 app.include_router(ping.router)
