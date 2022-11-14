@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from src.app.routers import ping
-from db import database
+from src.app.db import database
 from src.app.routers import records
 import uvicorn
 
